@@ -29,7 +29,7 @@ const Showroom = () => {
     const [dynamicMaxPriceLimit, setDynamicMaxPriceLimit] = useState(500000);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/cars')
+        axios.get('https://josh-autos-backend.onrender.com/api/cars')
             .then(res => {
                 if (res.data.success) {
                     setCars(res.data.cars);

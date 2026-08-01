@@ -17,7 +17,7 @@ const Profile = () => {
         if (user?.profilePic) {
             const fullUrl = user.profilePic.startsWith('http') 
                 ? user.profilePic 
-                : `http://localhost:5000/${user.profilePic}`;
+                : `https://josh-autos-backend.onrender.com/${user.profilePic}`;
             setProfilePicUrl(fullUrl);
         }
     }, [user]);
@@ -51,7 +51,7 @@ const Profile = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const res = await axios.put('http://localhost:5000/api/users/profile-pic', formData, {
+            const res = await axios.put('https://josh-autos-backend.onrender.com/api/users/profile-pic', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`
@@ -60,7 +60,7 @@ const Profile = () => {
 
             if (res.data.success) {
                 const savedPath = res.data.user.profilePic;
-                const finalBackendUrl = savedPath.startsWith('http') ? savedPath : `http://localhost:5000/${savedPath}`;
+                const finalBackendUrl = savedPath.startsWith('http') ? savedPath : `https://josh-autos-backend.onrender.com/${savedPath}`;
                 setProfilePicUrl(finalBackendUrl);
                 
                 if (typeof contextData?.setUser === 'function') contextData.setUser(res.data.user);
@@ -70,7 +70,7 @@ const Profile = () => {
             console.error(err);
             alert('Failed to complete upload backend sync.');
             if (user?.profilePic) {
-                setProfilePicUrl(user.profilePic.startsWith('http') ? user.profilePic : `http://localhost:5000/${user.profilePic}`);
+                setProfilePicUrl(user.profilePic.startsWith('http') ? user.profilePic : `https://josh-autos-backend.onrender.com/${user.profilePic}`);
             }
         } finally {
             setUploading(false);

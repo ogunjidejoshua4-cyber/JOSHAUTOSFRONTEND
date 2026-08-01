@@ -32,7 +32,7 @@ const VehicleDetails = () => {
     const getImageUrl = (path) => {
         if (!path) return 'https://via.placeholder.com/600x400';
         if (path.startsWith('http://') || path.startsWith('https://')) return path;
-        return `http://localhost:5000${path}`;
+        return `https://josh-autos-backend.onrender.com${path}`;
     };
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const VehicleDetails = () => {
         // ⚡ FIX 1: Safely sanitize the incoming ID to exactly 24 hex characters
         const cleanId = id && id.length > 24 ? id.substring(0, 24) : id;
 
-        axios.get(`http://localhost:5000/api/cars/${cleanId}`)
+        axios.get(`https://josh-autos-backend.onrender.com/api/cars/${cleanId}`)
             .then(res => {
                 if (res.data.success) {
                     setCar(res.data.car);
@@ -81,7 +81,7 @@ const VehicleDetails = () => {
         setLeadStatus('🔒 Deposit verification processing...');
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.put(`http://localhost:5000/api/cars/${id}`, {
+            const res = await axios.put(`https://josh-autos-backend.onrender.com/api/cars/${id}`, {
                 ...car,
                 existingImages: JSON.stringify(car.images),
                 status: 'Reserved' // Update database status
@@ -117,7 +117,7 @@ const VehicleDetails = () => {
 
         setLeadStatus('Processing offer parameters...');
         try {
-            const res = await axios.post('http://localhost:5000/api/inquiries',
+            const res = await axios.post('https://josh-autos-backend.onrender.com/api/inquiries',
                 { name, email, phone, message, carId: car._id },
                 { headers: { 'Authorization': `Bearer ${token}` } }
             );
@@ -166,7 +166,7 @@ const VehicleDetails = () => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:5000/api/cars/${id}`, formData, {
+            const res = await axios.put(`https://josh-autos-backend.onrender.com/api/cars/${id}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -190,7 +190,7 @@ const VehicleDetails = () => {
         if (!window.confirm('🚨 Are you absolutely certain you want to purge this asset from storage permanently?')) return;
         const token = localStorage.getItem('token');
         try {
-            const res = await axios.delete(`http://localhost:5000/api/cars/${id}`, {
+            const res = await axios.delete(`https://josh-autos-backend.onrender.com/api/cars/${id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.data.success) {

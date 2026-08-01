@@ -77,7 +77,7 @@ const Navbar = () => {
                                     <div style={styles.userIndicator}>
                                         {user.profilePic ? (
                                             <img
-                                                src={user.profilePic.startsWith('http') ? user.profilePic : `http://localhost:5000/${user.profilePic}`}
+                                                src={user.profilePic.startsWith('http') ? user.profilePic : `https://josh-autos-backend.onrender.com/${user.profilePic}`}
                                                 alt="Nav Mini"
                                                 style={styles.avatarMini}
                                             />
@@ -146,7 +146,7 @@ const Navbar = () => {
                                         <div style={styles.userIndicator}>
                                             {user.profilePic ? (
                                                 <img
-                                                    src={user.profilePic.startsWith('http') ? user.profilePic : `http://localhost:5000/${user.profilePic}`}
+                                                    src={user.profilePic.startsWith('http') ? user.profilePic : `https://josh-autos-backend.onrender.com/${user.profilePic}`}
                                                     alt="Nav Mini"
                                                     style={styles.avatarMini}
                                                 />

@@ -37,7 +37,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', {
+            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/register', {
                 name,
                 email,
                 password,
@@ -170,7 +170,7 @@ const Register = () => {
 
                     <button
                         type="button"
-                        onClick={() => window.location.href = 'http://localhost:5000/api/auth/google/register'}
+                        onClick={() => window.location.href = 'https://josh-autos-backend.onrender.com/api/auth/google/register'
                         style={styles.googleBtn}
                     >
                         <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24">

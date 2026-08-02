@@ -4,7 +4,7 @@ import axios from 'axios';
 export const AuthContext = createContext();
 
 // 💡 Dynamically fallback to local development if env var isn't set
-const API_URL = process.env.REACT_APP_API_URL || "https://josh-autos-backend.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://josh-autos-backend.onrender.com";
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);

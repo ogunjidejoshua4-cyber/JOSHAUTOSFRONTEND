@@ -170,7 +170,7 @@ const Register = () => {
 
                     <button
                         type="button"
-                        onClick={() => window.location.href = 'https://josh-autos-backend.onrender.com/api/auth/google/register'
+                        onClick={() => window.location.href = 'https://josh-autos-backend.onrender.com/api/auth/google/register'}
                         style={styles.googleBtn}
                     >
                         <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24">

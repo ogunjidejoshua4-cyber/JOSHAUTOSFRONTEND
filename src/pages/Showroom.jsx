@@ -78,12 +78,10 @@ const Showroom = () => {
         <div style={styles.container}>
             <style>{`
                 body { margin: 0; background-color: #05070f; }
-                
                 aside::-webkit-scrollbar { width: 6px; }
                 aside::-webkit-scrollbar-track { background: transparent; }
                 aside::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
                 aside::-webkit-scrollbar-thumb:hover { background: #334155; }
-                
                 input[type="range"]::-webkit-slider-thumb {
                     -webkit-appearance: none; height: 16px; width: 16px;
                     border-radius: 50%; background: #3b82f6; cursor: pointer;
@@ -91,18 +89,20 @@ const Showroom = () => {
                 }
                 input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
+                /* Fix Price Tag Overlay & Stack Order */
+                .showroom-price-tag {
+                    z-index: 2 !important;
                 }
 
                 /* Mobile & Tablet Responsiveness */
                 @media (max-width: 900px) {
                     .showroom-layout {
                         flex-direction: column !important;
+                        flex-wrap: nowrap !important;
                     }
                     .showroom-sidebar {
                         width: 100% !important;
+                        flex: 1 1 100% !important;
                         position: relative !important;
                         top: 0 !important;
                         max-height: none !important;
@@ -110,21 +110,12 @@ const Showroom = () => {
                     }
                     .showroom-grid-container {
                         width: 100% !important;
+                        flex: 1 1 100% !important;
                         min-width: 0 !important;
                     }
                 }
 
                 @media (max-width: 600px) {
-                    .showroom-container {
-                        padding: 1.5rem 1rem 3rem 1rem !important;
-                    }
-                    .showroom-title {
-                        font-size: 2rem !important;
-                    }
-                    .showroom-badge {
-                        display: inline-block;
-                        margin-top: 0.5rem;
-                    }
                     .showroom-grid {
                         grid-template-columns: 1fr !important;
                     }
@@ -132,8 +123,8 @@ const Showroom = () => {
             `}</style>
 
             <header style={styles.header}>
-                <h1 style={styles.mainTitle} className="showroom-title">
-                    Josh Autos <span style={styles.badge} className="showroom-badge">Showroom</span>
+                <h1 style={styles.mainTitle}>
+                    Josh Autos <span style={styles.badge}>Showroom</span>
                 </h1>
                 <p style={styles.subtitle}>Explore our pristine collection of verified exotic and domestic vehicles</p>
 
@@ -245,7 +236,7 @@ const Showroom = () => {
                                                 alt={car.title}
                                                 style={styles.image}
                                             />
-                                            <span style={styles.priceTag}>${car.price?.toLocaleString()}</span>
+                                            <span style={styles.priceTag} className="showroom-price-tag">#{car.price?.toLocaleString()}</span>
                                         </div>
 
                                         <div style={styles.cardContent}>
@@ -293,7 +284,7 @@ const styles = {
     },
     header: {
         textAlign: 'center',
-        marginBottom: '3rem',
+        marginBottom: '4rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -366,6 +357,7 @@ const styles = {
         border: '3px solid rgba(59, 130, 246, 0.1)',
         borderTop: '3px solid #3b82f6',
         borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
         marginBottom: '1.5rem'
     },
     loadingText: {
@@ -398,9 +390,10 @@ const styles = {
         maxWidth: '1300px',
         margin: '0 auto',
         alignItems: 'flex-start',
+        flexWrap: 'wrap'
     },
     sidebar: {
-        flex: '0 0 280px',
+        flex: '1 1 280px',
         backgroundColor: '#0b0f19',
         borderRadius: '20px',
         padding: '2rem',
@@ -509,12 +502,12 @@ const styles = {
         borderTop: '1px solid #1e293b'
     },
     gridContainer: {
-        flex: '1',
-        minWidth: '0'
+        flex: '3 1 680px',
+        minWidth: '320px'
     },
     grid: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
         gap: '1.5rem',
         width: '100%'
     },
@@ -587,8 +580,7 @@ const styles = {
     badgeRow: {
         display: 'flex',
         gap: '0.4rem',
-        marginBottom: '1rem',
-        flexWrap: 'wrap'
+        marginBottom: '1rem'
     },
     infoBadge: {
         backgroundColor: '#0f1322',

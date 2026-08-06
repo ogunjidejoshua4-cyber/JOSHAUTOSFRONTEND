@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { showToast, showErrorAlert } from '../utils/swal';
 
 const Login = () => {
@@ -45,7 +45,6 @@ const Login = () => {
             } else {
                 setError('Invalid credentials. Access Denied.');
             }
-            // Inside handleSubmit catch block in Login.jsx:
         } catch (err) {
             setLoading(false);
             const responseData = err.response?.data;
@@ -88,7 +87,7 @@ const Login = () => {
                     <div style={styles.formGroup}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <label style={styles.label}>Access Key Passcode</label>
-                            <a href="/forgot-password" style={styles.forgotLink}>Forgot Password?</a>
+                            <Link to="/forgot-password" style={styles.forgotLink}>Forgot Password?</Link>
                         </div>
                         <input
                             type="password"
@@ -124,7 +123,7 @@ const Login = () => {
                     </button>
 
                     <div style={{ color: '#94a3b8', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
-                        Don't have an account? <a href="/register" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Register Here</a>
+                        Don't have an account? <Link to="/register" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Register Here</Link>
                     </div>
                 </form>
             </div>

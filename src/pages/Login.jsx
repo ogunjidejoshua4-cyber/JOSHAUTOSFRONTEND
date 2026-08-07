@@ -32,6 +32,15 @@ const Login = () => {
             const responseData = await login(trimmedEmail, password);
             setLoading(false);
 
+            // 1. Check if backend returned unverified flag inside responseData (200 OK status)
+            if (responseData?.unverified === true) {
+                showToast('Account unverified. Redirecting to verification...', 'warning');
+                return navigate('/verify-email', {
+                    state: { email: responseData.email || trimmedEmail }
+                });
+            }
+
+            // 2. Normal Login Success Handling
             if (responseData && (responseData.success || responseData.status)) {
                 setPassword('');
                 const redirectPath = location.state?.from || '/showroom';
@@ -49,6 +58,7 @@ const Login = () => {
             setLoading(false);
             const responseData = err.response?.data;
 
+            // 3. Check if backend responded with 400 Bad Request containing unverified flag
             if (responseData?.unverified === true) {
                 showToast('Account unverified. Redirecting to verification...', 'warning');
                 return navigate('/verify-email', {

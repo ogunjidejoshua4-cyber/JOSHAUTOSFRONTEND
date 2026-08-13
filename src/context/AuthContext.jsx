@@ -4,7 +4,7 @@ import axios from 'axios';
 export const AuthContext = createContext();
 
 // 💡 Dynamically fallback to local development if env var isn't set
-const API_URL = import.meta.env.VITE_API_URL || "https://josh-autos-backend.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://joshautos.onrender.com";
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -36,12 +36,12 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // Helper to clean up credentials safely
-    const handleLogout = () => {
+    function handleLogout() {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
         setToken(null);
         setUser(null);
-    };
+    }
 
     // 🎯 2. Google OAuth Token Processor
     const handleGoogleSuccess = async (newToken) => {

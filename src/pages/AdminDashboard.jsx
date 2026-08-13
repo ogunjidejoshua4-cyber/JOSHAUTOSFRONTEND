@@ -28,7 +28,7 @@ const AdminDashboard = () => {
         window.addEventListener('resize', handleResize);
         
         const token = localStorage.getItem('token');
-        axios.get('https://josh-autos-backend.onrender.com/api/inquiries', {
+        axios.get('https://joshautos.onrender.com/api/inquiries', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then(res => {
@@ -67,7 +67,7 @@ const AdminDashboard = () => {
         }
 
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/cars', formData, {
+            const res = await axios.post('https://joshautos.onrender.com/api/cars', formData, {
                 headers: { 
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
@@ -104,7 +104,7 @@ const handleDeleteInquiry = (id) => {
         if (result.isConfirmed) {
             const token = localStorage.getItem('token');
             try {
-                const res = await axios.delete(`https://josh-autos-backend.onrender.com/api/inquiries/${id}`, {
+                const res = await axios.delete(`https://joshautos.onrender.com/api/inquiries/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 

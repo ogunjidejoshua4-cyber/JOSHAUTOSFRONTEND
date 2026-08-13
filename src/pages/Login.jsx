@@ -123,7 +123,7 @@ const Login = () => {
                     <button
                         type="button"
                         disabled={loading}
-                        onClick={() => window.location.href = 'https://josh-autos-backend.onrender.com/api/auth/google'}
+                        onClick={() => window.location.href = 'https://joshautos.onrender.com/api/auth/google'}
                         style={styles.googleBtn}
                     >
                         <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24">

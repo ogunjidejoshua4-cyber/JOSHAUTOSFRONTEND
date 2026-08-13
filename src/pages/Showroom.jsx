@@ -19,7 +19,7 @@ const Showroom = () => {
             handleGoogleSuccess(tokenFromUrl);
             navigate('/showroom', { replace: true });
         }
-    }, [tokenFromUrl]);
+    }, [tokenFromUrl, handleGoogleSuccess, navigate]);
 
     // Filter States
     const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +29,7 @@ const Showroom = () => {
     const [dynamicMaxPriceLimit, setDynamicMaxPriceLimit] = useState(500000);
 
     useEffect(() => {
-        axios.get('https://josh-autos-backend.onrender.com/api/cars')
+        axios.get('https://joshautos.onrender.com/api/cars')
             .then(res => {
                 if (res.data.success) {
                     setCars(res.data.cars);

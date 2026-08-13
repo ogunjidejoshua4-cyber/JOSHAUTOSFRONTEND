@@ -23,7 +23,7 @@ const VerifyEmail = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/verify-code', {
+            const res = await axios.post('https://joshautos.onrender.com/api/auth/verify-code', {
                 email,
                 code
             });
@@ -59,7 +59,7 @@ const VerifyEmail = () => {
         setError('');
         setSuccessMessage('');
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/resend-code', { email });
+            const res = await axios.post('https://joshautos.onrender.com/api/auth/resend-code', { email });
             if (res.data.status === true || res.data.success === true) {
                 setSuccessMessage('A new verification code has been sent to your Gmail!');
                 setCode(''); // Clean code input on resend too

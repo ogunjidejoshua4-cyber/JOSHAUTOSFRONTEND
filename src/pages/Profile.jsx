@@ -17,8 +17,9 @@ const Profile = () => {
         if (user?.profilePic) {
             const fullUrl = user.profilePic.startsWith('http') 
                 ? user.profilePic 
-                : `https://josh-autos-backend.onrender.com/${user.profilePic}`;
-            setProfilePicUrl(fullUrl);
+                : `https://joshautos.onrender.com/${user.profilePic}`;
+            const id = setTimeout(() => setProfilePicUrl(fullUrl), 0);
+            return () => clearTimeout(id);
         }
     }, [user]);
 
@@ -34,7 +35,7 @@ const Profile = () => {
     }
 
     const handleAvatarClick = () => {
-        fileInputRef.current.click();
+        fileInputRef.current?.click();
     };
 
     const handleFileChange = async (e) => {
@@ -51,7 +52,7 @@ const Profile = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const res = await axios.put('https://josh-autos-backend.onrender.com/api/users/profile-pic', formData, {
+            const res = await axios.put('https://joshautos.onrender.com/api/users/profile-pic', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`
@@ -60,7 +61,7 @@ const Profile = () => {
 
             if (res.data.success) {
                 const savedPath = res.data.user.profilePic;
-                const finalBackendUrl = savedPath.startsWith('http') ? savedPath : `https://josh-autos-backend.onrender.com/${savedPath}`;
+                const finalBackendUrl = savedPath.startsWith('http') ? savedPath : `https://joshautos.onrender.com/${savedPath}`;
                 setProfilePicUrl(finalBackendUrl);
                 
                 if (typeof contextData?.setUser === 'function') contextData.setUser(res.data.user);
@@ -69,8 +70,8 @@ const Profile = () => {
         } catch (err) {
             console.error(err);
             alert('Failed to complete upload backend sync.');
-            if (user?.profilePic) {
-                setProfilePicUrl(user.profilePic.startsWith('http') ? user.profilePic : `https://josh-autos-backend.onrender.com/${user.profilePic}`);
+                if (user?.profilePic) {
+                setProfilePicUrl(user.profilePic.startsWith('http') ? user.profilePic : `https://joshautos.onrender.com/${user.profilePic}`);
             }
         } finally {
             setUploading(false);

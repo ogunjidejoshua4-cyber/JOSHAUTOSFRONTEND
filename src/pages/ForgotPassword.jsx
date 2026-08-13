@@ -16,7 +16,7 @@ const ForgotPassword = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/forgot-password', { email });
+            const res = await axios.post('https://joshautos.onrender.com/api/auth/forgot-password', { email });
             if (res.data.status || res.data.success) {
                 showSuccessAlert('Code Sent! 📧', 'Check your email for the 6-digit reset code.');
                 setStep(2);
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/reset-password', {
+            const res = await axios.post('https://joshautos.onrender.com/api/auth/reset-password', {
                 email,
                 code,
                 newPassword

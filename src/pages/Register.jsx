@@ -1,11 +1,10 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { showSuccessAlert, showErrorAlert } from '../utils/swal';
 
 const Register = () => {
-    const { setUser } = useContext(AuthContext);
+    // Auth context not needed here
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -37,7 +36,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('https://josh-autos-backend.onrender.com/api/auth/register', {
+            const res = await axios.post('https://joshautos.onrender.com/api/auth/register', {
                 name,
                 email,
                 password,
@@ -170,7 +169,7 @@ const Register = () => {
 
                     <button
                         type="button"
-                        onClick={() => window.location.href = 'https://josh-autos-backend.onrender.com/api/auth/google/register'}
+                        onClick={() => window.location.href = 'https://joshautos.onrender.com/api/auth/google/register'}
                         style={styles.googleBtn}
                     >
                         <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24">
